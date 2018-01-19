@@ -1,0 +1,17 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import datetime
+from pandas_datareader import data, wb
+
+#Visualize stock prices from Yahoo finance's API, using Pandas remote data access function DataReader
+
+start_time = datetime.datetime(2010, 1, 1)      #Start time for financial records
+end_time = datetime.datetime(2016, 1, 1)        #End time for financial records
+
+#Fetch records for TESLA, from Yahoo's Finance API, from start to end dates
+df = data.DataReader('TSLA', 'yahoo', start_time, end_time)          
+df.reset_index(inplace = True)                  #Shift date from index to column #0
+
+plt.plot_date(df.Date, df.Close, '-')           #Plot Closing prices of the stock against time.
+plt.show()
+
